@@ -1,0 +1,22 @@
+{
+  "name": "gcn_sample",
+  "version": "0.1.0",
+  "description": "A geometry calculator in node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape tests/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karlpokus/gcn_sample.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/karlpokus/gcn_sample/issues"
+  },
+  "homepage": "https://github.com/karlpokus/gcn_sample#readme",
+  "devDependencies": {
+    "tape": "^4.6.3"
+  }
+}
