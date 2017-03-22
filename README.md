@@ -15,8 +15,10 @@ $ npm test
 var GCN = require('./lib/gcn'),
     gcn = new GCN();
 
-// circumTri(x, y, z)
+// Calculate the circumference of a triangle - circumTri(x, y, z)
 var res = gcn.circumTri(5, 5, 5);
+// Calculate the area of a triangle - areaTri(b, h);
+var res = gcn.areaTri(5, 5);
 ```
 
 # License
