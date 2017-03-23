@@ -1,7 +1,7 @@
 # gcn_sample
 A geometry calculator in nodeJS. A work in progress.
 
-# usage
+# install
 ```bash
 # install
 $ git clone [repo]
@@ -10,17 +10,23 @@ $ npm i
 $ npm test
 ```
 
-### api
+# api
+
+### gnc.calc(shape, geometry, dimensions)
+- All arguments are required
+- `shape` *string* triangle|rectangle
+- `geometry` *string* area|circumference
+- `dimensions` *array* [numbers]
+ - Area of triangle `[base, height]`
+ - Circumference of triangle `[sideA, sideB, sideC]`
+ - Area of rectangle `[base, height]`
+ - Circumference of rectangle `[base, height]`
+
+# Example
 ```javascript
 var GCN = require('./lib/gcn'),
-    gcn = new GCN();
-
-// Calculate the circumference of a triangle - circumTri(sideA, sideB, sideC)
-var ct = gcn.circumTri(5, 5, 5);
-// Calculate the area of a triangle - areaTri(base, height);
-var at = gcn.areaTri(5, 5);
-// Calculate the circumference of a rectangle - circumRect(base, height);
-var cr = gcn.circumRect(5, 5);
+    gcn = new GCN(),
+    areaOfTriangle = gcn.calc('triangle', 'area', [5, 5]);
 ```
 
 # License
