@@ -5,8 +5,9 @@ var test = require('tape'),
 
 test('calc', function(t){
   // n args
-  t.throws(gcn.calc.bind(gcn, null), /Wrong number of arguments/, 'throws on only 1 args passed');
-  t.throws(gcn.calc.bind(gcn, null, null), /Wrong number of arguments/, 'throws on only 2 args passed');
+  t.throws(gcn.calc.bind(gcn), /Wrong number of arguments/, 'throws on 0 args passed');
+  t.throws(gcn.calc.bind(gcn, null), /Wrong number of arguments/, 'throws on 1 args passed');
+  t.throws(gcn.calc.bind(gcn, null, null), /Wrong number of arguments/, 'throws on 2 args passed');
   // args type
   t.throws(gcn.calc.bind(gcn, 'triangle', 'area', '5'), /One or more arguments is of the wrong type/, 'throws on wrong arg type');
   t.throws(gcn.calc.bind(gcn, 5, "area", [5, 5]), /One or more arguments is of the wrong type/, 'throws on wrong arg type');
