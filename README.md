@@ -4,8 +4,7 @@ A geometry calculator in nodeJS.
 # install
 ```bash
 # install
-$ git clone [repo]
-$ npm install
+$ npm install gcn_sample
 # run tests
 $ npm test
 # run tests with coverage
@@ -49,7 +48,7 @@ Required arguments for `dimensions` by shape
 
 # Example
 ```javascript
-var GCN = require('./lib/gcn'),
+var GCN = require('gcn_sample'),
     gcn = new GCN(),
     triangle = {
       shape: 'triangle', geometry: 'circumference', dimensions: [5, 5, 5]
