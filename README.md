@@ -1,5 +1,5 @@
 # gcn_sample
-A geometry calculator in nodeJS. A work in progress.
+A geometry calculator in nodeJS.
 
 # install
 ```bash
@@ -12,33 +12,52 @@ $ npm test
 
 # api
 
-### calc(shape, geometry, dimensions)
-Calculates the [geometry] of the [shape] based on [dimensions]
+### calc(shape)
+Calculates the geometry of the shape based on dimensions
 
-Arguments
-- All arguments are required
-- `shape` *string* triangle|rectangle
-- `geometry` *string* area|circumference
-- `dimensions` *array* [numbers]
+Required argument
+- `shape` *Object*
 
-Required arguments for `dimensions`
+Required keys for `shape`
+- `shape` *String* triangle|rectangle
+- `geometry` *String* area|circumference
+- `dimensions` *Array* [numbers]
+
+Required arguments for `dimensions` by shape and geometry
 - Area of triangle `[base, height]`
 - Circumference of triangle `[sideA, sideB, sideC]`
 - Area of rectangle `[base, height]`
 - Circumference of rectangle `[base, height]`
 
-### totalAreaMultipleShapes(arrayOfShapes)
-Calculates the total area of all shapes supplied
+### totalAreaMultipleShapes(shapes)
+Calculates the total area of shapes provided
 
-Arguments
-- All arguments are required
-- `arrayOfShapes` *array* [objects] with keys `shape` triangle|rectangle|circle and `dimensions` like above.
+Required argument
+- `shapes` *Array* [Objects]
+
+Required keys for each shape
+- `shape` *String* triangle|rectangle|circle
+- `dimensions` *Array* [numbers]
+
+Required arguments for `dimensions` by shape
+- Area of triangle `[base, height]`
+- Area of rectangle `[base, height]`
+- Area of circle `[radius]`
 
 # Example
 ```javascript
 var GCN = require('./lib/gcn'),
     gcn = new GCN(),
-    areaOfTriangle = gcn.calc('triangle', 'area', [5, 5]);
+    triangle = {
+      shape: 'triangle', geometry: 'circumference', dimensions: [5, 5, 5]
+    },  
+    circumferenceOfTriangle = gcn.calc(triangle),
+    multipleShapes = [
+      {shape: 'triangle', dimensions: [6, 6]},
+      {shape: 'rectangle', dimensions: [10, 10]},
+      {shape: 'circle', dimensions: [5]}
+    ],
+    totalArea = gcn.totalAreaMultipleShapes(multipleShapes);
 ```
 
 # License

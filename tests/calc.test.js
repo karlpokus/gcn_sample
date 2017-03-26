@@ -3,26 +3,42 @@ var test = require('tape'),
     GCN = require(path.resolve(__dirname, '../', 'index')),
     gcn = new GCN();
 
+// test data
+var collectionIntegrityError = /Object key values are not allowed/,
+    errorData = [
+      {args: {shape: 5}, msg: 'wrong shape type'},
+      {args: {shape: 'circle'}, msg: 'shape value not allowed'},
+      {args: {geometry: 5}, msg: 'wrong geometry type'},
+      {args: {geometry: 'house'}, msg: 'geometry value not allowed'},
+      {args: {dimensions: {}}, msg: 'wrong dimensions type'},
+      {args: {dimensions: [NaN]}, msg: 'wrong item type in dimensions'},
+      {args: {shape: 'triangle', geometry: 'circumference', dimensions: [5, 5]}, msg: 'wrong dimension length'}
+    ],
+    areaTri = {
+      shape: 'triangle', geometry: 'area', dimensions: [5, 5] // 12.5
+    },
+    circumTri = {
+      shape: 'triangle', geometry: 'circumference', dimensions: [5, 5, 5] // 15
+    },
+    areaRect = {
+      shape: 'rectangle', geometry: 'area', dimensions: [5, 5] // 25
+    },
+    circumRect = {
+      shape: 'rectangle', geometry: 'circumference', dimensions: [5, 5] // 20
+    };
+
 test('calc', function(t){
-  // n args
-  t.throws(gcn.calc.bind(gcn), /Wrong number of arguments/, 'throws on 0 args passed');
-  t.throws(gcn.calc.bind(gcn, null), /Wrong number of arguments/, 'throws on 1 args passed');
-  t.throws(gcn.calc.bind(gcn, null, null), /Wrong number of arguments/, 'throws on 2 args passed');
-  // args type
-  t.throws(gcn.calc.bind(gcn, 'triangle', 'area', '5'), /One or more arguments is of the wrong type/, 'throws on wrong arg type');
-  t.throws(gcn.calc.bind(gcn, 5, "area", [5, 5]), /One or more arguments is of the wrong type/, 'throws on wrong arg type');
-  t.throws(gcn.calc.bind(gcn, 'triangle', 5, [5, 5]), /One or more arguments is of the wrong type/, 'throws on wrong arg type');
-  // unknown shape, geometry
-  t.throws(gcn.calc.bind(gcn, 'random shape', 'area', [5, 5]), /Unknown shape/, 'throws on unknown shape');
-  t.throws(gcn.calc.bind(gcn, 'triangle', 'wierd geometry', [5, 5]), /Unknown geometry/, 'throws on unknown geometry');
-  // wrong dimensions
-  t.throws(gcn.calc.bind(gcn, 'triangle', 'area', []), /Dimension data is missing/, 'throws on missing dimension data');
-  t.throws(gcn.calc.bind(gcn, 'triangle', 'area', [5, "5"]), /One or more dimensions is not a number/, 'throws on wrong type of dimension data');
-  // should work
-  t.equal(gcn.calc('triangle', 'area', [5, 5]), 12.5, 'triangle area');
-  t.equal(gcn.calc('triangle', 'circumference', [5, 5, 5]), 15, 'triangle circumference');
-  t.equal(gcn.calc('rectangle', 'area', [5, 5]), 25, 'rectangle area');
-  t.equal(gcn.calc('rectangle', 'circumference', [5, 5]), 20, 'rectangle circumference');
+  t.throws(gcn.calc.bind(gcn), /Wrong number of arguments/, 'missing args');
+  t.throws(gcn.calc.bind(gcn, 'shape'), /Argument is not an Object/, 'wrong type of arg');
+
+  errorData.forEach(function(obj){
+    t.throws(gcn.calc.bind(gcn, obj.args), collectionIntegrityError, obj.msg);
+  });
+
+  t.equal(gcn.calc(areaTri), 12.5, 'Area of triangle');
+  t.equal(gcn.calc(circumTri), 15, 'Circumference of triangle');
+  t.equal(gcn.calc(areaRect), 25, 'Area of rectangle');
+  t.equal(gcn.calc(circumRect), 20, 'Circumference of rectangle');
 
   t.end();
 });
