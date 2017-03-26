@@ -1,10 +1,11 @@
 {
   "name": "gcn_sample",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A geometry calculator in node.js",
   "main": "index.js",
   "scripts": {
-    "test": "tape tests/*.js"
+    "test": "tape tests/*.js",
+    "test-cov": "cd tests && covert calc.test.js totalAreaMultipleShapes.test.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/karlpokus/gcn_sample#readme",
   "devDependencies": {
+    "covert": "^1.1.0",
     "tape": "^4.6.3"
   }
 }

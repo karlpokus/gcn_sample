@@ -5,10 +5,13 @@ A geometry calculator in nodeJS.
 ```bash
 # install
 $ git clone [repo]
-$ npm i
+$ npm install
 # run tests
 $ npm test
+# run tests with coverage
+$ npm run test-cov
 ```
+Note: I filed an issue on the [buffer deprecation warning](https://github.com/substack/covert/issues/15) for `covert`.
 
 # api
 
