@@ -7,11 +7,12 @@ var test = require('tape'),
 var collectionIntegrityError = /Object key values are not allowed/,
     errorData = [
       {args: {shape: 5}, msg: 'wrong shape type'},
-      {args: {shape: 'circle'}, msg: 'shape value not allowed'},
       {args: {geometry: 5}, msg: 'wrong geometry type'},
-      {args: {geometry: 'house'}, msg: 'geometry value not allowed'},
-      {args: {dimensions: {}}, msg: 'wrong dimensions type'},
-      {args: {dimensions: [NaN]}, msg: 'wrong item type in dimensions'},
+      {args: {shape: 'tri', geometry: 'area', dimensions: [5, 5]}, msg: 'shape not allowed'},
+      {args: {shape: 'triangle', geometry: 'house', dimensions: [5, 5]}, msg: 'geometry not allowed'},
+      {args: {shape: 'tri', geometry: 'house', dimensions: [5, 5]}, msg: 'shape and geometry not allowed'},
+      {args: {shape: 'triangle', geometry: 'circumference', dimensions: {}}, msg: 'wrong dimensions type'},
+      {args: {shape: 'triangle', geometry: 'circumference', dimensions: [NaN]}, msg: 'wrong item type in dimensions'},
       {args: {shape: 'triangle', geometry: 'circumference', dimensions: [5, 5]}, msg: 'wrong dimension length'}
     ],
     areaTri = {

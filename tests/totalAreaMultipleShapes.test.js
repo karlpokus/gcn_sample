@@ -7,10 +7,9 @@ var test = require('tape'),
 var collectionIntegrityError = /Array items are not allowed/,
     errorData = [
       {args: ['string'], msg: 'wrong array item type'},
+      {args: [{}], msg: 'missing keys'},
       {args: [{shape: 5}], msg: 'wrong shape type'},
       {args: [{shape: 'bird'}], msg: 'shape value not allowed'},
-      {args: [{geometry: 5}], msg: 'wrong geometry type'},
-      {args: [{geometry: 'house'}], msg: 'geometry value not allowed'},
       {args: [{dimensions: {}}], msg: 'wrong dimensions type'},
       {args: [{dimensions: [NaN]}], msg: 'wrong item type in dimensions'},
       {args: [{shape: 'circle', dimensions: [5, 5]}], msg: 'wrong dimension length'}
