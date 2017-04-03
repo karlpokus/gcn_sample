@@ -1,5 +1,5 @@
 # gcn_sample
-A geometry calculator in nodeJS.
+A geometry calculator in nodeJS by [these](https://gist.github.com/KristofferV/60eafd920c799b73dd6660965039f5a8) requirements.
 
 # install
 ```bash
